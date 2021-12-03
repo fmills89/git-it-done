@@ -1,5 +1,23 @@
 var issuesContainerEl = document.querySelector("#issues-container");
 var limitWarningEl = document.querySelector("#limit-warning");
+//DOM refrenece for header span to display showing issues for:
+var repoNameEl = document.querySelector('#repo-name');
+
+getRepoName = () => {
+    var queryString = document.location.search;
+    // removed part of query string returned in var queryString
+    var repoName = queryString.split('=')[1];
+    console.log(repoName);
+    // Updating var repoNameEl to whatever repo name was searched
+
+    if (repoName) {
+        repoNameEl.textContent = repoName;
+
+        getRepoIssues(repoName);
+    }else {
+        document.location.replace("./index.html");
+    }  
+};
 
 var getRepoIssues = function(repo) {
     console.log(repo);
@@ -81,4 +99,6 @@ var displayWarning = function(repo) {
     limitWarningEl.appendChild(linkEl)
 ;}
 
-getRepoIssues("facebook/react");
+
+
+getRepoName();
